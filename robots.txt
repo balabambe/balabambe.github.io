@@ -10,5 +10,5 @@ Allow: /archives/
 # Disallow: /css/
 # Disallow: /fancybox/
 
-Sitemap: https://balabambe.github.io/sitemap.xml
+Sitemap: https://blog.balabambe.com/sitemap.xml
 
