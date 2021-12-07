@@ -91,6 +91,9 @@ table:not([class]) tr {
 table:not([class]) tr:hover {
   background: var(--block);
 }
+iframe:not([src*="https://disqus.com"]) {
+  display: none;
+}
 :root {
   --blur-px: 12px;
   --blur-bg: rgba(255,255,255,0.5);
