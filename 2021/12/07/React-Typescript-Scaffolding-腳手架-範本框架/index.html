@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>React + Typescript Scaffolding Template 腳手架 範本框架 - 拔辣搬筆的攻城獅人蔘</title>
+
+  
+    <meta name="description" content="開發 React 時，不知道要用什麼套件嗎？雖然 create-react-app 有提供了 template，但大部份都還是需要自行建構，我這裡整合了一些常用的套件供快速開發，歡迎大家使用。 react-typescript-scaffolding 此 Scaffolding 包含了以下套件： 123456789101112131415161718create-react-app (react-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React + Typescript Scaffolding Template 腳手架 範本框架">
+<meta property="og:url" content="https://blog.balabambe.com/2021/12/07/React-Typescript-Scaffolding-%E8%85%B3%E6%89%8B%E6%9E%B6-%E7%AF%84%E6%9C%AC%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name" content="拔辣搬筆的攻城獅人蔘">
+<meta property="og:description" content="開發 React 時，不知道要用什麼套件嗎？雖然 create-react-app 有提供了 template，但大部份都還是需要自行建構，我這裡整合了一些常用的套件供快速開發，歡迎大家使用。 react-typescript-scaffolding 此 Scaffolding 包含了以下套件： 123456789101112131415161718create-react-app (react-">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.balabambe.com/2021/12/07/React-Typescript-Scaffolding-%E8%85%B3%E6%89%8B%E6%9E%B6-%E7%AF%84%E6%9C%AC%E6%A1%86%E6%9E%B6/2021-12-07-14-22-03.png">
+<meta property="article:published_time" content="2021-12-07T03:01:49.000Z">
+<meta property="article:modified_time" content="2023-06-19T02:07:24.877Z">
+<meta property="article:author" content="BalaBambe">
+<meta property="article:tag" content="Scaffolding">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="Typescript">
+<meta property="article:tag" content="腳手架">
+<meta property="article:tag" content="Template">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.balabambe.com/2021/12/07/React-Typescript-Scaffolding-%E8%85%B3%E6%89%8B%E6%9E%B6-%E7%AF%84%E6%9C%AC%E6%A1%86%E6%9E%B6/2021-12-07-14-22-03.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+  
+  
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6BESDWMMD1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6BESDWMMD1');
+</script>
+
+</head>
+
+<body>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+
+<header class="header">
+
+<div class="logo-wrap"><a class="title" href="/"><div class="main">拔辣搬筆的攻城獅人蔘</div><div class="sub cap">從後端走到前端 邁向全端之路</div></a></div>
+<nav class="menu dis-select"><a class="nav-item active" href="/">Blog</a><a class="nav-item" href="/about-me">About Me</a><a class="nav-item" href="/portfolio">Portfolio</a></nav></header>
+
+<div class="widgets">
+<div class="widget-wrap" id="toc"><div class="widget-header cap dis-select"><span class="name">TOC</span></div><div class="widget-body fs14 post"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B3%87%E6%96%99%E5%A4%BE%E7%B5%90%E6%A7%8B"><span class="toc-text">資料夾結構</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Router-Config"><span class="toc-text">Router Config</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RouterOutlet"><span class="toc-text">RouterOutlet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#API-Calls"><span class="toc-text">API Calls</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Navbar"><span class="toc-text">Navbar</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Breadcrumb"><span class="toc-text">Breadcrumb</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Icons"><span class="toc-text">Icons</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B5%90%E8%AA%9E"><span class="toc-text">結語</span></a></li></ol></div></div></div>
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a><span class="sep"></span><a class="cap breadcrumb" href="/">Blog</a></div><div id="post-meta">Posted on&nbsp;<time datetime="2021-12-07T03:01:49.000Z">2021-12-07</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>React + Typescript Scaffolding Template 腳手架 範本框架</span></h1>
+<p>開發 React 時，不知道要用什麼套件嗎？雖然 create-react-app 有提供了 template，但大部份都還是需要自行建構，我這裡整合了一些常用的套件供快速開發，歡迎大家使用。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/balabambe/react-typescript-scaffolding">react-typescript-scaffolding</a></p>
+<p>此 Scaffolding 包含了以下套件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">create-react-app (react-scripts) 4.0</span><br><span class="line">React 17</span><br><span class="line">TypeScript 4</span><br><span class="line">react-router 5.2</span><br><span class="line">react-router-dom 5.1</span><br><span class="line">react-router-config 5.3</span><br><span class="line">redux 4.1</span><br><span class="line">react-redux 7.2</span><br><span class="line">redux-thunk 2.3</span><br><span class="line">redux-devtools-extension 2.13 (for chrome dev inspector use)</span><br><span class="line">axios 0.21</span><br><span class="line">craco-alias 3.0</span><br><span class="line">craco-plugin-scoped-css 1.1</span><br><span class="line">eslint airbnb typescript</span><br><span class="line">sass (dart-sass)</span><br><span class="line">fontawesome</span><br><span class="line">bootstrap 5</span><br><span class="line">react-bootstrap 2</span><br></pre></td></tr></table></figure>
+
+<h2 id="資料夾結構"><a href="#資料夾結構" class="headerlink" title="資料夾結構"></a>資料夾結構</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2021/12/07/React-Typescript-Scaffolding-%E8%85%B3%E6%89%8B%E6%9E%B6-%E7%AF%84%E6%9C%AC%E6%A1%86%E6%9E%B6/2021-12-07-14-22-03.png"></p>
+<p>這裡挑一些重點資料夾解釋：</p>
+<ul>
+<li>&#x2F;src&#x2F;layouts</li>
+</ul>
+<p>這裡應放置版型的外層框架，例如登入頁是整頁的，內頁包含了側邊欄與頂部標題列之類的。</p>
+<ul>
+<li>&#x2F;src&#x2F;components</li>
+</ul>
+<p>這裡放置的是會在各頁面間共用到的元件，皆放置於此資料夾。例如 Banner 在 A B C 頁面中都用得到，基於程式碼複用性原則，應該將 Banner 抽離出來放在 <code>components</code> 資料夾中，在需要用到的頁面引用。</p>
+<ul>
+<li>&#x2F;src&#x2F;pages</li>
+</ul>
+<p>這邊放置的就會是各頁面，應依照 router 的部份來放置，在找頁面時就比較不會像無頭蒼蠅一樣找不到頁面。</p>
+<h2 id="Router-Config"><a href="#Router-Config" class="headerlink" title="Router Config"></a>Router Config</h2><p>Config 的部份我參考 <code>Vue</code> 寫了一個出來，但 React Router 在 Path 中，子路由需要將完整路徑寫出，所以我在 Config json 做了一點優化，利用 Recursive Function 將路徑自動完整套入，子路由就不需要再填寫完整路徑了，對於有子路由需要大搬家的狀況會方便許多。</p>
+<p>程式碼路徑如下：</p>
+<ul>
+<li>&#x2F;src&#x2F;router&#x2F;router.ts</li>
+<li>&#x2F;src&#x2F;router&#x2F;router.config.ts</li>
+</ul>
+<h2 id="RouterOutlet"><a href="#RouterOutlet" class="headerlink" title="RouterOutlet"></a>RouterOutlet</h2><p>我參考 <code>Vue</code> 的部份寫了一個 <code>RouterOutlet</code> 的 Component，可以方便的利用建立好的 router config 做嵌套使用，就不用到處在 Component 裡寫 <code>&lt;Route/&gt;</code> 了。</p>
+<p>程式碼可以參考以下路徑：</p>
+<ul>
+<li>&#x2F;src&#x2F;components&#x2F;RouterOutlet.tsx</li>
+<li>&#x2F;src&#x2F;router&#x2F;router.ts</li>
+<li>&#x2F;src&#x2F;layouts&#x2F;MainLayout.tsx</li>
+<li>&#x2F;src&#x2F;pages&#x2F;Posts&#x2F;index.tsx</li>
+</ul>
+<h2 id="API-Calls"><a href="#API-Calls" class="headerlink" title="API Calls"></a>API Calls</h2><p>我將 Redux(redux-thunk) 的部份與 axios 整合，在 Component 內 dispatch 時，API 回傳的資料就會自動存入 reducer 內，開發者只需要將資料透過 Selector 拿出來即可。</p>
+<p>程式碼路徑如下：</p>
+<ul>
+<li>&#x2F;src&#x2F;store&#x2F;post&#x2F;actions.ts</li>
+<li>&#x2F;src&#x2F;store&#x2F;post&#x2F;reducers.ts</li>
+</ul>
+<h2 id="Navbar"><a href="#Navbar" class="headerlink" title="Navbar"></a>Navbar</h2><p>路徑：<code>/src/components/Navbar.tsx</code></p>
+<p>側邊欄的部份。</p>
+<h2 id="Breadcrumb"><a href="#Breadcrumb" class="headerlink" title="Breadcrumb"></a>Breadcrumb</h2><p>路徑：<code>/src/components/Navbar.tsx</code></p>
+<p>這部份提供了簡易的麵包屑供使用，如有需求就請自己手動修改囉。</p>
+<h2 id="Icons"><a href="#Icons" class="headerlink" title="Icons"></a>Icons</h2><p>我在這裡有包了一個 <code>fontawesome</code> 的 Icon component 供使用，你可以在 <a target="_blank" rel="noopener" href="https://fontawesome.com/">https://fontawesome.com/</a> 搜尋免費的 icon 並且將 icon 名稱貼上後就可以引用該 icon 了。</p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>以上，是針對 <code>Vue</code> 想要轉換到 <code>React</code> 開發時的一個過渡腳手架，希望能幫助 <code>Vue</code> 的開發者在適應 <code>React</code> 的期間能夠更開心的 Coding。</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>License</span></div><div class="body"><p>The article uses <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</a> license agreement, please indicate the source for reprinting.</p>
+</div></section><section id="share"><div class="header"><span>Share</span></div><div class="body"><div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://blog.balabambe.com/2021/12/07/React-Typescript-Scaffolding-%E8%85%B3%E6%89%8B%E6%9E%B6-%E7%AF%84%E6%9C%AC%E6%A1%86%E6%9E%B6/" /></div><div class="social-wrap dis-select"><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;Copied!&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/8411ed322ced6.svg"/></a></div></div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="header cap theme"><span>READ NEXT</span></section><section class="body fs14"><a id="next" href="/2021/12/01/%E8%A7%A3%E6%B1%BA-Google-Search-Console-%E6%8A%93%E4%B8%8D%E5%88%B0-Hexo-%E6%94%BE%E5%9C%A8-Github-Pages-%E7%9A%84-sitemap-xml-%E7%9A%84%E5%95%8F%E9%A1%8C/">解決 Google Search Console 抓不到 Hexo 放在 Github Pages 的 sitemap.xml 的問題<span class="note">Older</span></a><div class="line"></div><a id="prev" href="/2023/06/19/%E8%A7%A3%E6%B1%BA-Windows-11-Keyboard-Layout-%E9%8D%B5%E7%9B%A4%E4%BD%88%E5%B1%80%E5%88%AA%E4%B8%8D%E6%8E%89-ENG-%E7%9A%84%E5%95%8F%E9%A1%8C/">解決 Windows 11 Keyboard Layout 鍵盤佈局刪不掉 ENG 的問題<span class="note">Newer</span></a><div class="line"></div><a id="more" href="/archives">All Articles</a></section></div>
+
+
+
+
+
+  <div id="disqus_thread"></div>
+  <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+      var disqus_config = function () {
+        this.page.url = 'https://blog.balabambe.com/2021/12/07/React-Typescript-Scaffolding-%E8%85%B3%E6%89%8B%E6%9E%B6-%E7%AF%84%E6%9C%AC%E6%A1%86%E6%9E%B6/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = '1638846109000'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://balabambe.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</p>
+<p>This site was deployed by <a href="https://blog.balabambe.com/">@BalaBambe</a> using <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.3.0">Stellar</a>.</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.3.0';
+  stellar.config = {
+    date_suffix: {
+      just: 'Just',
+      min: 'minutes ago',
+      hour: 'hours ago',
+      day: 'days ago',
+      month: 'months ago',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/js/plugins/sites.js',
+    friendsjs: '/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper/swiper-bundle.min.css","js":"https://unpkg.com/swiper/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+  
+<script id="dsq-count-scr" src="//balabambe.disqus.com/count.js" async></script>
+
+
+</body>
+</html>

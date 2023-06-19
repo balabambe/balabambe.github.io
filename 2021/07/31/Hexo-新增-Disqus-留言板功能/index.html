@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>Hexo 新增 Disqus 留言板功能 - 拔辣搬筆的攻城獅人蔘</title>
+
+  
+    <meta name="description" content="Disqus 是普遍還蠻常見的一個留言板系統，且在安裝完 Hexo 後，如果有特別挑 theme 沒有用預設的 landscape theme 的話 (landscape 預設好像也沒有 disqus?)，然後挑到的 theme 沒有支援 disqus，這篇來教你怎麼手動安裝 Disqus 囉。 至 Disqus 註冊 起初我們先至 https:&#x2F;&#x2F;disqus.com 官網註冊一個帳號並且建立網">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 新增 Disqus 留言板功能">
+<meta property="og:url" content="https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/index.html">
+<meta property="og:site_name" content="拔辣搬筆的攻城獅人蔘">
+<meta property="og:description" content="Disqus 是普遍還蠻常見的一個留言板系統，且在安裝完 Hexo 後，如果有特別挑 theme 沒有用預設的 landscape theme 的話 (landscape 預設好像也沒有 disqus?)，然後挑到的 theme 沒有支援 disqus，這篇來教你怎麼手動安裝 Disqus 囉。 至 Disqus 註冊 起初我們先至 https:&#x2F;&#x2F;disqus.com 官網註冊一個帳號並且建立網">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-10-17-33.png">
+<meta property="og:image" content="https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-10-18-39.png">
+<meta property="og:image" content="https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-10-26-27.png">
+<meta property="og:image" content="https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-10-55-58.png">
+<meta property="og:image" content="https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-10-59-48.png">
+<meta property="og:image" content="https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-11-11-21.png">
+<meta property="og:image" content="https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-12-00-35.png">
+<meta property="og:image" content="https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-12-02-59.png">
+<meta property="og:image" content="https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-12-10-07.png">
+<meta property="og:image" content="https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-12-13-09.png">
+<meta property="article:published_time" content="2021-07-31T02:04:35.000Z">
+<meta property="article:modified_time" content="2023-06-19T02:07:24.863Z">
+<meta property="article:author" content="BalaBambe">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Disqus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-10-17-33.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+  
+  
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6BESDWMMD1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6BESDWMMD1');
+</script>
+
+</head>
+
+<body>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+
+<header class="header">
+
+<div class="logo-wrap"><a class="title" href="/"><div class="main">拔辣搬筆的攻城獅人蔘</div><div class="sub cap">從後端走到前端 邁向全端之路</div></a></div>
+<nav class="menu dis-select"><a class="nav-item active" href="/">Blog</a><a class="nav-item" href="/about-me">About Me</a><a class="nav-item" href="/portfolio">Portfolio</a></nav></header>
+
+<div class="widgets">
+<div class="widget-wrap" id="toc"><div class="widget-header cap dis-select"><span class="name">TOC</span></div><div class="widget-body fs14 post"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%B3-Disqus-%E8%A8%BB%E5%86%8A"><span class="toc-text">至 Disqus 註冊</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%9D-Disqus-%E8%87%B3-Hexo"><span class="toc-text">安裝 Disqus 至 Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%9D%E7%95%99%E8%A8%80%E8%A8%88%E6%95%B8%E5%8A%9F%E8%83%BD"><span class="toc-text">安裝留言計數功能</span></a></li></ol></div></div></div>
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a><span class="sep"></span><a class="cap breadcrumb" href="/">Blog</a></div><div id="post-meta">Posted on&nbsp;<time datetime="2021-07-31T02:04:35.000Z">2021-07-31</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>Hexo 新增 Disqus 留言板功能</span></h1>
+<p>Disqus 是普遍還蠻常見的一個留言板系統，且在安裝完 Hexo 後，如果有特別挑 theme 沒有用預設的 landscape theme 的話 (landscape 預設好像也沒有 disqus?)，然後挑到的 theme 沒有支援 disqus，這篇來教你怎麼手動安裝 Disqus 囉。</p>
+<h2 id="至-Disqus-註冊"><a href="#至-Disqus-註冊" class="headerlink" title="至 Disqus 註冊"></a>至 Disqus 註冊</h2><ol>
+<li><p>起初我們先至 <a target="_blank" rel="noopener" href="https://disqus.com/">https://disqus.com</a> 官網註冊一個帳號並且建立網站專屬的留言板，進到官網後我們先按下 <code>GET STARTED</code><br> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-10-17-33.png"></p>
+</li>
+<li><p>註冊完後或者是在已登入的狀態下就會進到這個頁面，選擇 <code>I want to install Disqus on my site</code><br> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-10-18-39.png"></p>
+</li>
+<li><p>依循以下指示輸入資料：</p>
+<ul>
+<li><code>Website Name</code>: 要注意這裡是你的 disqus 專屬網址的名稱，會是 <code>shortname</code>.disqus.com</li>
+<li><code>Category</code>: 可以根據你的 Blog 是什麼樣的類型選擇分類</li>
+<li><code>Language</code>: 如果選擇 Chinese，中文的部份是殘體中文，如果介意的話可以使用 English。<br> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-10-26-27.png"></li>
+</ul>
+</li>
+<li><p>第 1 步是進到購買計劃的部份，往下可以選擇 Basic，如果網站人數瀏覽人次不多的話，我們就用這個計劃就好<br> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-10-55-58.png"></p>
+</li>
+<li><p>第 2-1 步選擇你的網站類型，這裡有列出來的應該都是有寫好的專用 Plugin (WordPress 就有)，但列表裡並沒有 Hexo，所以我們選擇最底下的 <code>I dont&#39;t see my platform listed, install manually with Universal Code</code><br> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-10-59-48.png"></p>
+</li>
+<li><p>第 2-2 步就會有影音的部份教你怎麼安裝程式碼，這裡我們留待下面手把手教你怎麼安裝!</p>
+</li>
+<li><p>第 3 步是設定你要應用的網站留言板的相關設定，填寫你想填的資料或是都不填也可以，但要記得 <code>Website Name</code> 不要改到就好，或是再另外改成你想要的即可</p>
+</li>
+<li><p>第 4 步是評論的審核機制，你可以選擇不受限的 <code>Balanced</code>，或是評論是需要經過系統審核或有限的 <code>Strict</code>，差異解說如下：</p>
+<ul>
+<li>圖片、影片或連結<code>允許/不允許</code>在留言裡</li>
+<li>訪客留言是<code>允許/不允許</code>的</li>
+<li>留言被 flagged (被標記有害的意思?) <code>5次/3次</code> 會被送到待審核的機制中</li>
+<li>留言內有限制或敏感字的部份都會被自動刪除</li>
+<li><a target="_blank" rel="noopener" href="https://help.disqus.com/en/articles/1717255-toxic-mod-filter">有害的評論</a> <code>需要你的審核才能顯示/自動刪除</code></li>
+<li><code>Strict</code> 的部份，話題(Threads)會在 30 天後自動關閉<br> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-11-11-21.png"></li>
+</ul>
+</li>
+</ol>
+<h2 id="安裝-Disqus-至-Hexo"><a href="#安裝-Disqus-至-Hexo" class="headerlink" title="安裝 Disqus 至 Hexo"></a>安裝 Disqus 至 Hexo</h2><p>以下的 theme 以 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">stellar</a> 這個佈景主題為主，在某些檔案的安裝上都是可以客製化的，所以你可以把檔案安裝在你覺得適合的位置，或是跟著我安裝在同樣的位置中。</p>
+<ol>
+<li><p>修改 <code>_config.yml</code><br> 請先確認 <code>url:</code> 這個參數是有設定好你的網站的 url，再來在檔案底端新增以下參數 (注意 yml 檔的縮排)</p>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">disqus:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">thread_count:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">shortname:</span> &#123;<span class="string">輸入上面註冊流程中的</span> <span class="string">Website</span> <span class="string">name</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立 Disqus 專屬的 ejs 檔案<br> 將以下程式碼安裝在 <code>themes/stellar/layout/_partial/plugins/disqus/index.ejs</code></p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="keyword">if</span> (config.<span class="property">disqus</span>.<span class="property">enable</span>) &#123; %&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;disqus_thread&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="comment">/**</span></span></span></span><br><span class="line"><span class="comment"><span class="language-javascript"><span class="language-xml">      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.</span></span></span></span><br><span class="line"><span class="comment"><span class="language-javascript"><span class="language-xml">      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="keyword">var</span> disqus_config = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">this</span>.<span class="property">page</span>.<span class="property">url</span> = <span class="string">&#x27;&lt;%- page.permalink %&gt;&#x27;</span>;  <span class="comment">// Replace PAGE_URL with your page&#x27;s canonical URL variable</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">this</span>.<span class="property">page</span>.<span class="property">identifier</span> = <span class="string">&#x27;&lt;%- page.date %&gt;&#x27;</span>; <span class="comment">// Replace PAGE_IDENTIFIER with your page&#x27;s unique identifier variable</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      &#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      (<span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="comment">// DON&#x27;T EDIT BELOW THIS LINE</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="keyword">var</span> d = <span class="variable language_">document</span>, s = d.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      s.<span class="property">src</span> = <span class="string">&#x27;https://&lt;%- config.disqus.shortname %&gt;.disqus.com/embed.js&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      s.<span class="title function_">setAttribute</span>(<span class="string">&#x27;data-timestamp&#x27;</span>, +<span class="keyword">new</span> <span class="title class_">Date</span>());</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      (d.<span class="property">head</span> || d.<span class="property">body</span>).<span class="title function_">appendChild</span>(s);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      &#125;)();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">noscript</span>&gt;</span>Please enable JavaScript to view the <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://disqus.com/?ref_noscript&quot;</span>&gt;</span>comments powered by Disqus.<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span></span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+<p> 參數的部份：</p>
+<ul>
+<li>第 8 行 <code>&lt;%- page.permalink %&gt;</code> 這裡是指定頁面的獨立連結</li>
+<li>第 9 行 <code>&lt;%- page.date %&gt;</code> 這是頁面的唯一識別碼，我以 page 的發佈時間為主</li>
+<li>第 13 行 <code>&lt;%- config.disqus.shortname %&gt;</code> 這裡是指 Website name，從 <code>_config.yml</code> 檔裡來的設定</li>
+</ul>
+</li>
+<li><p>將 Disqus 安裝在適當的頁面內<br> 目前我們的 Hexo 只有文章的部份需要 Comment 功能，所以打開 <code>themes/stellar/layout/post.ejs</code> 裡，需要自己找一下適當的位置安插，我安插的位置在文章最底部的部份</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%- <span class="title function_">partial</span>(<span class="string">&#x27;_partial/plugins/disqus/index.ejs&#x27;</span>) %&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安裝完後就可以預覽看看有沒有出現 Disqus 囉<br> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-12-00-35.png"></p>
+</li>
+</ol>
+<h2 id="安裝留言計數功能"><a href="#安裝留言計數功能" class="headerlink" title="安裝留言計數功能"></a>安裝留言計數功能</h2><p>安裝的樣子如下圖紅框<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-12-02-59.png"></p>
+<ol>
+<li><p>新增留言計數功能的程式碼到 <code>themes/stellar/layout/_partial/plugins/disqus/thread_count.ejs</code></p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="keyword">if</span> (config.<span class="property">disqus</span>.<span class="property">thread_count</span>) &#123; %&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">id</span>=<span class="string">&quot;dsq-count-scr&quot;</span> <span class="attr">src</span>=<span class="string">&quot;//&lt;%- config.disqus.shortname %&gt;.disqus.com/count.js&quot;</span> <span class="attr">async</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+<p> 參數的部份：</p>
+<ul>
+<li><code>&lt;%- config.disqus.shortname %&gt;</code> 一樣是 <code>Website name</code>，在 <code>_config.yml</code> 檔案裡的設定</li>
+</ul>
+</li>
+<li><p>安裝程式碼在 Layout 裡<br> 將以下程式碼安插在 <code>themes/stellar/layout/layout.ejs</code> 結尾 <code>&lt;/body&gt;</code> 的標籤之前</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%- <span class="title function_">partial</span>(<span class="string">&#x27;_partial/plugins/disqus/thread_count.ejs&#x27;</span>)%&gt;</span><br></pre></td></tr></table></figure>
+<p> 大概是長這樣<br> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-12-10-07.png"></p>
+</li>
+<li><p>應用在文章列表的每一個文章區塊中<br> 打開 <code>themes/stellar/layout/_partial/main/post_list/post_card.ejs</code>，將程式碼安插在適當的位置中，以本例是插在第 27 行之後</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="keyword">if</span> (config.<span class="property">disqus</span>.<span class="property">thread_count</span>) &#123; %&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span> | <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;disqus-comment-count&quot;</span> <span class="attr">data-disqus-url</span>=<span class="string">&quot;&lt;%- post.permalink %&gt;&quot;</span>&gt;</span>0 Comments<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+<p> 參數的部份：</p>
+<ul>
+<li><code>&lt;%- post.permalink %&gt;</code> 在安裝 Disqus 的第二步驟的第 8 行是相對應的，所以這裡會是文章的完整連結，才抓取得到該文章的留言數</li>
+</ul>
+<p> 所以大概也是長這樣<br> <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/2021-07-31-12-13-09.png"></p>
+</li>
+<li><p>開啟 <code>thread_count</code><br> 修改 <code>_config.yml</code> 的 <code>thread_count</code> 為 <code>true</code></p>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">thread_count:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p> 然後就可以看結果啦。</p>
+</li>
+</ol>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>License</span></div><div class="body"><p>The article uses <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</a> license agreement, please indicate the source for reprinting.</p>
+</div></section><section id="share"><div class="header"><span>Share</span></div><div class="body"><div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/" /></div><div class="social-wrap dis-select"><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;Copied!&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/8411ed322ced6.svg"/></a></div></div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="header cap theme"><span>READ NEXT</span></section><section class="body fs14"><a id="next" href="/2021/07/29/Hexo-%E6%89%8B%E5%8B%95%E6%96%B0%E5%A2%9E-Google-Analytics%E3%80%81Google-Tag-Manager-%E7%9A%84%E8%BF%BD%E8%B9%A4%E7%A2%BC/">Hexo 手動新增 Google Analytics、Google Tag Manager 的追蹤碼<span class="note">Older</span></a><div class="line"></div><a id="prev" href="/2021/12/01/%E8%A7%A3%E6%B1%BA-Google-Search-Console-%E6%8A%93%E4%B8%8D%E5%88%B0-Hexo-%E6%94%BE%E5%9C%A8-Github-Pages-%E7%9A%84-sitemap-xml-%E7%9A%84%E5%95%8F%E9%A1%8C/">解決 Google Search Console 抓不到 Hexo 放在 Github Pages 的 sitemap.xml 的問題<span class="note">Newer</span></a><div class="line"></div><a id="more" href="/archives">All Articles</a></section></div>
+
+
+
+
+
+  <div id="disqus_thread"></div>
+  <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+      var disqus_config = function () {
+        this.page.url = 'https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = '1627697075000'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://balabambe.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</p>
+<p>This site was deployed by <a href="https://blog.balabambe.com/">@BalaBambe</a> using <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.3.0">Stellar</a>.</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.3.0';
+  stellar.config = {
+    date_suffix: {
+      just: 'Just',
+      min: 'minutes ago',
+      hour: 'hours ago',
+      day: 'days ago',
+      month: 'months ago',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/js/plugins/sites.js',
+    friendsjs: '/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper/swiper-bundle.min.css","js":"https://unpkg.com/swiper/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+  
+<script id="dsq-count-scr" src="//balabambe.disqus.com/count.js" async></script>
+
+
+</body>
+</html>

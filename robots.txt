@@ -1,0 +1,14 @@
+# hexo robots.txt
+User-agent: *
+Allow: /
+Allow: /about-me/
+Allow: /portfolio/
+Allow: /tags/
+Allow: /archives/ 
+
+# Disallow: /js/
+# Disallow: /css/
+# Disallow: /fancybox/
+
+Sitemap: https://blog.balabambe.com/sitemap.xml
+

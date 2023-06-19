@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>Apache2.2 於 NAT 後方正常使用 VirtualHost (兩個以上的網站在同一主機上) - 拔辣搬筆的攻城獅人蔘</title>
+
+  
+    <meta name="description" content="這次只是純紀錄我搞好久的東西，沒想到一個小動作就解決了，害我爬文這麼久 Orz 若我們要在同一個主機上跑兩個以上網站，有很多種方法可以做，第一個是在主機上綁不同的 Public IP，第二個就是在同一個 domain 下建立不同的子目錄跑不一樣的網站，第三種呢，就是本文要說的，通常獨立的網站都會有一個代表性的 Domain，但是在同一台主機下要跑不同 Domain 的網站就得靠這第三種的方法，底下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache2.2 於 NAT 後方正常使用 VirtualHost (兩個以上的網站在同一主機上)">
+<meta property="og:url" content="https://blog.balabambe.com/2014/05/31/Apache2-2-%E6%96%BC-NAT-%E5%BE%8C%E6%96%B9%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8-VirtualHost-%E5%85%A9%E5%80%8B%E4%BB%A5%E4%B8%8A%E7%9A%84%E7%B6%B2%E7%AB%99%E5%9C%A8%E5%90%8C%E4%B8%80%E4%B8%BB%E6%A9%9F%E4%B8%8A/index.html">
+<meta property="og:site_name" content="拔辣搬筆的攻城獅人蔘">
+<meta property="og:description" content="這次只是純紀錄我搞好久的東西，沒想到一個小動作就解決了，害我爬文這麼久 Orz 若我們要在同一個主機上跑兩個以上網站，有很多種方法可以做，第一個是在主機上綁不同的 Public IP，第二個就是在同一個 domain 下建立不同的子目錄跑不一樣的網站，第三種呢，就是本文要說的，通常獨立的網站都會有一個代表性的 Domain，但是在同一台主機下要跑不同 Domain 的網站就得靠這第三種的方法，底下">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2014-05-30T17:59:33.000Z">
+<meta property="article:modified_time" content="2023-06-19T02:07:24.861Z">
+<meta property="article:author" content="BalaBambe">
+<meta property="article:tag" content="apache">
+<meta property="article:tag" content="apache-nat">
+<meta property="article:tag" content="httpd">
+<meta property="article:tag" content="ip-分享器">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+  
+  
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6BESDWMMD1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6BESDWMMD1');
+</script>
+
+</head>
+
+<body>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+
+<header class="header">
+
+<div class="logo-wrap"><a class="title" href="/"><div class="main">拔辣搬筆的攻城獅人蔘</div><div class="sub cap">從後端走到前端 邁向全端之路</div></a></div>
+<nav class="menu dis-select"><a class="nav-item active" href="/">Blog</a><a class="nav-item" href="/about-me">About Me</a><a class="nav-item" href="/portfolio">Portfolio</a></nav></header>
+
+<div class="widgets">
+
+<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">Recent Update</span></div><div class="widget-body fs14"><div class="line"></div><a class="more-item" href="/2023/06/19/%E8%A7%A3%E6%B1%BA-Windows-11-Keyboard-Layout-%E9%8D%B5%E7%9B%A4%E4%BD%88%E5%B1%80%E5%88%AA%E4%B8%8D%E6%8E%89-ENG-%E7%9A%84%E5%95%8F%E9%A1%8C/"><div class="cap"><time>2023-06-19</time></div><span class="title">解決 Windows 11 Keyboard Layout 鍵盤佈局刪不掉 ENG 的問題</span></a><div class="line"></div><a class="more-item" href="/2021/12/01/%E8%A7%A3%E6%B1%BA-Google-Search-Console-%E6%8A%93%E4%B8%8D%E5%88%B0-Hexo-%E6%94%BE%E5%9C%A8-Github-Pages-%E7%9A%84-sitemap-xml-%E7%9A%84%E5%95%8F%E9%A1%8C/"><div class="cap"><time>2023-06-19</time></div><span class="title">解決 Google Search Console 抓不到 Hexo 放在 Github Pages 的 sitemap.xml 的問題</span></a><div class="line"></div><a class="more-item" href="/2014/04/28/%E5%8F%AA%E9%9D%A0%E5%89%8D%E7%AB%AF%E8%99%95%E7%90%86%E6%AA%94%E6%A1%88%E4%B8%8B%E8%BC%89%E7%9A%84%E5%A5%97%E4%BB%B6-Downloadify/"><div class="cap"><time>2023-06-19</time></div><span class="title">只靠前端處理檔案下載的套件 Downloadify</span></a><div class="line"></div><a class="more-item" href="/2014/05/20/%E6%89%8B%E5%8B%95%E7%B7%A8%E8%AD%AF%E5%AE%89%E8%A3%9D-apache-2-4-Scientific-Linux-6-5-CentOS-6-5/"><div class="cap"><time>2023-06-19</time></div><span class="title">手動編譯安裝 apache 2.4 @ Scientific Linux 6.5 / CentOS 6.5</span></a><div class="line"></div><a class="more-item" href="/2014/02/26/ubuntu-12-04-sudo-%E4%B8%8D%E7%94%A8%E8%BC%B8%E5%85%A5%E5%AF%86%E7%A2%BC%E7%9A%84%E6%96%B9%E6%B3%95/"><div class="cap"><time>2023-06-19</time></div><span class="title">ubuntu 12.04 sudo 不用輸入密碼的方法</span></a></div></div>
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a><span class="sep"></span><a class="cap breadcrumb" href="/">Blog</a></div><div id="post-meta">Posted on&nbsp;<time datetime="2014-05-30T17:59:33.000Z">2014-05-31</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>Apache2.2 於 NAT 後方正常使用 VirtualHost (兩個以上的網站在同一主機上)</span></h1>
+<p>這次只是純紀錄我搞好久的東西，沒想到一個小動作就解決了，害我爬文這麼久 Orz</p>
+<p>若我們要在同一個主機上跑兩個以上網站，有很多種方法可以做，第一個是在主機上綁不同的 Public IP，第二個就是在同一個 domain 下建立不同的子目錄跑不一樣的網站，第三種呢，就是本文要說的，通常獨立的網站都會有一個代表性的 Domain，但是在同一台主機下要跑不同 Domain 的網站就得靠這第三種的方法，底下聽我娓娓道來。</p>
+<p>這種方式呢，就是 Apache2 內建的 <code>VirtualHost</code> 功能 (不需額外安裝套件)<code>，VirtualHost</code> 有兩種設定方式，一種是 ip-base，就是用於一台主機上有兩組以上的 Public IP，用 Domain 綁 IP 到網站，另一種是 name-base 的方式，也就是用 Domain 的方式綁網站，通常會比較建議用 name-base 的方式問題會比較少，對於浮動 IP 架站來說的人會比較方便，以下我們來看看設定方式吧</p>
+<p>打開 <code>/etc/httpd/conf/httpd.conf</code></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">NameVirtualHost</span> domainA.urdomain:<span class="number">80</span> #綁你主要的 Domain，這個參數在 Apache <span class="number">2</span>.<span class="number">4</span> 中會被移除，要注意  </span><br><span class="line"><span class="section">&lt;VirtualHost domainA.urdomain<span class="number">:80</span>&gt;</span> <span class="comment">#綁你其中之一的 Domain  </span></span><br><span class="line">    <span class="attribute">ServerAdmin</span> webmaster@aaa.example.com  </span><br><span class="line">    <span class="attribute">DocumentRoot</span> /var/www/html/test1/ #目錄指向網站  </span><br><span class="line">    <span class="attribute">ServerName</span> domainA.urdomain #要記得給 ServerName，打 Domain 上去就行  </span><br><span class="line">    <span class="attribute">AddType</span> application/x-httpd-php .php  </span><br><span class="line">    <span class="section">&lt;Directory <span class="string">&quot;/var/www/html/test1/&quot;</span> &gt;</span> <span class="comment">#針對這個網站的目錄做個別設定  </span></span><br><span class="line">        <span class="attribute">Order</span> <span class="literal">Deny</span>,<span class="literal">Allow</span>  </span><br><span class="line">        <span class="attribute">Allow</span> from <span class="literal">all</span>  </span><br><span class="line">    <span class="section">&lt;/Directory&gt;</span>  </span><br><span class="line">    <span class="attribute">Alias</span> /test1-<span class="number">1</span> <span class="string">&quot;/var/www/html/test1-1/&quot;</span> #若在這個 Domain 的網站下有其他子目錄就可以在這裡設定  </span><br><span class="line">    <span class="section">&lt;Directory <span class="string">&quot;/var/www/html/test1-1/&quot;</span>&gt;</span> <span class="comment">#針對這個子目錄做其他特別設定  </span></span><br><span class="line">        <span class="attribute">Options</span> Indexes MultiViews FollowSymLinks  </span><br><span class="line">        <span class="attribute">AllowOverride</span> <span class="literal">All</span>  </span><br><span class="line">        <span class="attribute">Order</span> <span class="literal">allow</span>,<span class="literal">deny</span>  </span><br><span class="line">        <span class="attribute">Allow</span> from <span class="literal">all</span>  </span><br><span class="line">    <span class="section">&lt;/Directory&gt;</span>  </span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="section">&lt;VirtualHost domainB.urdomain<span class="number">:80</span>&gt;</span> <span class="comment">#綁你另一個網站的 Domain  </span></span><br><span class="line">    <span class="attribute">ServerAdmin</span> webmaster@bbb.example.com  </span><br><span class="line">    <span class="attribute">DocumentRoot</span> /var/www/html/test2/  </span><br><span class="line">    <span class="attribute">ServerName</span> domainB.urdomain  </span><br><span class="line">    <span class="attribute">AddType</span> application/x-httpd-php .php  </span><br><span class="line">    <span class="attribute">Alias</span> /phpmyadmin /var/www/html/phpmyadmin/  </span><br><span class="line">    <span class="section">&lt;Directory <span class="string">&quot;/var/www/html/phpmyadmin/&quot;</span> &gt;</span>  </span><br><span class="line">        <span class="attribute">Order</span> <span class="literal">Deny</span>,<span class="literal">Allow</span>  </span><br><span class="line">        <span class="attribute">Allow</span> from <span class="literal">all</span>  </span><br><span class="line">    <span class="section">&lt;/Directory&gt;</span>  </span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>理論上來說，只要設定好，網站就能看 Domain 分別跑網站了，但小弟本人是架在 NAT 底下，就是用一台 IP 分享器以 PPPoE 連上網路，然後用 port forwarding 的方式把 80 port 轉到伺服器上，就在小弟儲存設定了，也把 Apache 重開了，卻發現不管怎麼樣上面的設定都沒有用，都一直跑 Apache 的預設頁面 (有 It Works! 的那個頁面)，在 google 上爬文許久，有人說要改 Linux 的 <code>/etc/hosts</code>，原本以為是個 trick，想說怎麼可能要設定這個東西，但是人就是不能太鐵齒(其實是為自己太廢找理由)，我就抱著死馬當活馬醫的心態設定看看，所以我在 hosts 裡面分別設定 domain 的 Private IP 居然就好了，實在是槌心肝啊。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.xxx.xxxx domainA.urdomain domainB.urdomain <span class="comment">#(xxx 的部份就自己下 ifconfig 指令自己看自己改囉)</span></span><br></pre></td></tr></table></figure>
+
+<p>以上，只要在 <code>/etc/hosts</code> 裡加上這行就好了，前面的 IP 還不能是 127.0.0.1 喔，也不能是 Public IP，其實原理如何我也不太清楚，我一直以為只要 domain 解析是自己家的 Public IP，分享器負責幫我 port forwarding 就好了說… Orz</p>
+<hr>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>License</span></div><div class="body"><p>The article uses <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</a> license agreement, please indicate the source for reprinting.</p>
+</div></section><section id="share"><div class="header"><span>Share</span></div><div class="body"><div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://blog.balabambe.com/2014/05/31/Apache2-2-%E6%96%BC-NAT-%E5%BE%8C%E6%96%B9%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8-VirtualHost-%E5%85%A9%E5%80%8B%E4%BB%A5%E4%B8%8A%E7%9A%84%E7%B6%B2%E7%AB%99%E5%9C%A8%E5%90%8C%E4%B8%80%E4%B8%BB%E6%A9%9F%E4%B8%8A/" /></div><div class="social-wrap dis-select"><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;Copied!&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/8411ed322ced6.svg"/></a></div></div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="header cap theme"><span>READ NEXT</span></section><section class="body fs14"><a id="next" href="/2014/05/28/Wordpress-%E6%89%8B%E5%8B%95%E5%A2%9E%E5%8A%A0-Google-Analytics-%E8%BF%BD%E8%B9%A4%E7%A8%8B%E5%BC%8F%E7%A2%BC/">Wordpress 手動增加 Google Analytics 追蹤程式碼<span class="note">Older</span></a><div class="line"></div><a id="prev" href="/2014/09/06/CentOS-7-%E5%AE%89%E8%A3%9D-remi-repository-%E4%B8%A6%E9%80%8F%E9%81%8E-remi-%E5%AE%89%E8%A3%9D-php-5-4%E3%80%815-5%E3%80%815-6/">CentOS 7 安裝 remi repository 並透過 remi 安裝 php 5.4、5.5、5.6<span class="note">Newer</span></a><div class="line"></div><a id="more" href="/archives">All Articles</a></section></div>
+
+
+
+
+
+  <div id="disqus_thread"></div>
+  <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+      var disqus_config = function () {
+        this.page.url = 'https://blog.balabambe.com/2014/05/31/Apache2-2-%E6%96%BC-NAT-%E5%BE%8C%E6%96%B9%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8-VirtualHost-%E5%85%A9%E5%80%8B%E4%BB%A5%E4%B8%8A%E7%9A%84%E7%B6%B2%E7%AB%99%E5%9C%A8%E5%90%8C%E4%B8%80%E4%B8%BB%E6%A9%9F%E4%B8%8A/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = '1401472773000'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://balabambe.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</p>
+<p>This site was deployed by <a href="https://blog.balabambe.com/">@BalaBambe</a> using <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.3.0">Stellar</a>.</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.3.0';
+  stellar.config = {
+    date_suffix: {
+      just: 'Just',
+      min: 'minutes ago',
+      hour: 'hours ago',
+      day: 'days ago',
+      month: 'months ago',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/js/plugins/sites.js',
+    friendsjs: '/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper/swiper-bundle.min.css","js":"https://unpkg.com/swiper/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+  
+<script id="dsq-count-scr" src="//balabambe.disqus.com/count.js" async></script>
+
+
+</body>
+</html>

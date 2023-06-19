@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>手動編譯安裝 apache 2.4 @ Scientific Linux 6.5 / CentOS 6.5 - 拔辣搬筆的攻城獅人蔘</title>
+
+  
+    <meta name="description" content="一般我們可以透過 yum 來安裝自己想要的套件，但有時卻不是最新版，雖然可以透過修改 yum repo 來達成目的，往往還是得需要一些工夫 且在程式軟體界常常有前輩告訴我們用最新版的不一定好，但還是紀錄一下安裝過程 手動安裝時，因為我們需要透過 gcc C&#x2F;C++ 編譯，make、make install 來安裝程式，先請確定系統有這些開發套件，一般我們可以輸入以下指令把所有開發套件都安">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手動編譯安裝 apache 2.4 @ Scientific Linux 6.5 &#x2F; CentOS 6.5">
+<meta property="og:url" content="https://blog.balabambe.com/2014/05/20/%E6%89%8B%E5%8B%95%E7%B7%A8%E8%AD%AF%E5%AE%89%E8%A3%9D-apache-2-4-Scientific-Linux-6-5-CentOS-6-5/index.html">
+<meta property="og:site_name" content="拔辣搬筆的攻城獅人蔘">
+<meta property="og:description" content="一般我們可以透過 yum 來安裝自己想要的套件，但有時卻不是最新版，雖然可以透過修改 yum repo 來達成目的，往往還是得需要一些工夫 且在程式軟體界常常有前輩告訴我們用最新版的不一定好，但還是紀錄一下安裝過程 手動安裝時，因為我們需要透過 gcc C&#x2F;C++ 編譯，make、make install 來安裝程式，先請確定系統有這些開發套件，一般我們可以輸入以下指令把所有開發套件都安">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2014-05-20T10:10:15.000Z">
+<meta property="article:modified_time" content="2023-06-19T02:07:24.884Z">
+<meta property="article:author" content="BalaBambe">
+<meta property="article:tag" content="apache">
+<meta property="article:tag" content="centos">
+<meta property="article:tag" content="未分類">
+<meta property="article:tag" content="install">
+<meta property="article:tag" content="installation">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+  
+  
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6BESDWMMD1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6BESDWMMD1');
+</script>
+
+</head>
+
+<body>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+
+<header class="header">
+
+<div class="logo-wrap"><a class="title" href="/"><div class="main">拔辣搬筆的攻城獅人蔘</div><div class="sub cap">從後端走到前端 邁向全端之路</div></a></div>
+<nav class="menu dis-select"><a class="nav-item active" href="/">Blog</a><a class="nav-item" href="/about-me">About Me</a><a class="nav-item" href="/portfolio">Portfolio</a></nav></header>
+
+<div class="widgets">
+
+<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">Recent Update</span></div><div class="widget-body fs14"><div class="line"></div><a class="more-item" href="/2023/06/19/%E8%A7%A3%E6%B1%BA-Windows-11-Keyboard-Layout-%E9%8D%B5%E7%9B%A4%E4%BD%88%E5%B1%80%E5%88%AA%E4%B8%8D%E6%8E%89-ENG-%E7%9A%84%E5%95%8F%E9%A1%8C/"><div class="cap"><time>2023-06-19</time></div><span class="title">解決 Windows 11 Keyboard Layout 鍵盤佈局刪不掉 ENG 的問題</span></a><div class="line"></div><a class="more-item" href="/2021/12/01/%E8%A7%A3%E6%B1%BA-Google-Search-Console-%E6%8A%93%E4%B8%8D%E5%88%B0-Hexo-%E6%94%BE%E5%9C%A8-Github-Pages-%E7%9A%84-sitemap-xml-%E7%9A%84%E5%95%8F%E9%A1%8C/"><div class="cap"><time>2023-06-19</time></div><span class="title">解決 Google Search Console 抓不到 Hexo 放在 Github Pages 的 sitemap.xml 的問題</span></a><div class="line"></div><a class="more-item" href="/2014/04/28/%E5%8F%AA%E9%9D%A0%E5%89%8D%E7%AB%AF%E8%99%95%E7%90%86%E6%AA%94%E6%A1%88%E4%B8%8B%E8%BC%89%E7%9A%84%E5%A5%97%E4%BB%B6-Downloadify/"><div class="cap"><time>2023-06-19</time></div><span class="title">只靠前端處理檔案下載的套件 Downloadify</span></a><div class="line"></div><a class="more-item" href="/2014/05/20/%E6%89%8B%E5%8B%95%E7%B7%A8%E8%AD%AF%E5%AE%89%E8%A3%9D-apache-2-4-Scientific-Linux-6-5-CentOS-6-5/"><div class="cap"><time>2023-06-19</time></div><span class="title">手動編譯安裝 apache 2.4 @ Scientific Linux 6.5 / CentOS 6.5</span></a><div class="line"></div><a class="more-item" href="/2014/02/26/ubuntu-12-04-sudo-%E4%B8%8D%E7%94%A8%E8%BC%B8%E5%85%A5%E5%AF%86%E7%A2%BC%E7%9A%84%E6%96%B9%E6%B3%95/"><div class="cap"><time>2023-06-19</time></div><span class="title">ubuntu 12.04 sudo 不用輸入密碼的方法</span></a></div></div>
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a><span class="sep"></span><a class="cap breadcrumb" href="/">Blog</a></div><div id="post-meta">Posted on&nbsp;<time datetime="2014-05-20T10:10:15.000Z">2014-05-20</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>手動編譯安裝 apache 2.4 @ Scientific Linux 6.5 / CentOS 6.5</span></h1>
+<p>一般我們可以透過 yum 來安裝自己想要的套件，但有時卻不是最新版，雖然可以透過修改 yum repo 來達成目的，往往還是得需要一些工夫</p>
+<p>且在程式軟體界常常有前輩告訴我們用最新版的不一定好，但還是紀錄一下安裝過程</p>
+<p>手動安裝時，因為我們需要透過 gcc C&#x2F;C++ 編譯，<code>make</code>、<code>make install</code> 來安裝程式，先請確定系統有這些開發套件，一般我們可以輸入以下指令把所有開發套件都安裝好</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum groupinstall <span class="string">&quot;Development Tools&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>安裝完畢後，至 <a target="_blank" rel="noopener" href="http://httpd.apache.org/download.cgi">http://httpd.apache.org/download.cgi</a> 下載最新版的 apache 到 <code>/usr/src/httpd/</code> 裡 (本例使用 2.4.9)</p>
+<p>因 apache 2.4 安裝需要 <code>apr</code>，請至 <a target="_blank" rel="noopener" href="http://apr.apache.org/download.cgi">http://apr.apache.org/download.cgi</a> 下載 <code>apr</code> (本例使用 1.5.1) 與 <code>apr-util</code> (本例使用 1.5.3)</p>
+<p>然後解壓縮 <code>httpd-2.4.9.tar.gz</code>、<code>apr-1.5.1.tar.gz</code>、<code>apr-util-1.5.3.tar.gz</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/src/httpd/  </span><br><span class="line">tar -zxvf httpd-2.4.9.tar.gz  </span><br><span class="line">tar -zxvf apr-1.5.1.tar.gz  </span><br><span class="line">tar -zxvf apr-util-1.5.3.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>之後會得出三個資料夾：</p>
+<ul>
+<li>apr-1.5.1  </li>
+<li>apr-util-1.5.3  </li>
+<li>httpd-2.4.9</li>
+</ul>
+<p>請將 <code>apr-1.5.1</code> 與 <code>apr-util-1.5.3</code> 移動至 <code>httpd-2.4.9/srclib/</code> 底下</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> apr-1.5.1 ./httpd-2.4.9/srclib/apr  </span><br><span class="line"><span class="built_in">mv</span> apr-util-1.5.3 ./httpd-2.4.9/srclib/apr-util</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>OPTIONAL</strong> 若另外需要(一般來說通常都會需要) <code>mod_rewrite</code> 與 <code>mod_ssl</code>，請安裝下列四個套件，否則在編譯 apache 時會無法 compile</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install pcre pcre-devel openssl openssl-devel</span><br></pre></td></tr></table></figure>
+
+<p>接下來開始編譯並安裝 apache</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> httpd-2.4.9  </span><br><span class="line">./configure --prefix=/etc/httpd --sysconfdir=/etc/httpd/conf/ --with-inculded-apr --enable-so --enable-rewirte --enable-ssl --enable-cgi --enable-cgid --enable-modules=most --enable-mpms-shared=all  </span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>安裝完畢後，為 apache 建立開機自動啟動的 script</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> build/rpm/httpd.init /etc/init.d/httpd</span><br></pre></td></tr></table></figure>
+
+<p>接著進行修改 <code>/etc/init.d/httpd</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/init.d/httpd</span><br></pre></td></tr></table></figure>
+
+<p>修改下列2處</p>
+<blockquote>
+<p>60: httpd&#x3D;${HTTPD-&#x2F;usr&#x2F;sbin&#x2F;httpd} -&gt; 改為 -&gt; httpd&#x3D;${HTTPD-&#x2F;etc&#x2F;httpd&#x2F;bin&#x2F;httpd}<br>61: pidfile&#x3D;${PIDFILE-&#x2F;var&#x2F;run&#x2F;${prog}.pid} -&gt; 改為 -&gt; pidfile&#x3D;${PIDFILE-&#x2F;etc&#x2F;httpd&#x2F;logs&#x2F;${prog}.pid}</p>
+</blockquote>
+<p>接著給啟動 script 增加執行的權限：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x /etc/init.d/httpd</span><br></pre></td></tr></table></figure>
+
+<p>新增 httpd 到開機啟動管理程式裡</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --add httpd</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>/usr/sbin</code> 下建立與 <code>/etc/httpd/bin/</code> 的連結</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /etc/httpd/bin/* /usr/sbin/</span><br></pre></td></tr></table></figure>
+
+<p>在來建立 log 紀錄檔的連結</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /etc/httpd/logs /var/log/httpd</span><br></pre></td></tr></table></figure>
+
+<p>接下來就可以嘗試啟動 apache 了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/httpd/bin/httpd -k start</span><br></pre></td></tr></table></figure>
+
+<p>若啟動時出現這個錯誤訊息</p>
+<blockquote>
+<p>Starting httpd: AH00558: httpd: Could not reliably determine the server’s fully qualified domain name, using localhost.localdomain. Set the ‘ServerName’ directive globally to suppress this message</p>
+</blockquote>
+<p>請修改 <code>/etc/httpd/conf/httpd.conf</code> 第 192 行，將 <code>ServerName localhost</code> 的註解拿掉就行了</p>
+<p>接著請打開您的瀏覽器，在網址列輸入您的機器 IP (http:&#x2F;&#x2F;{機器ip}&#x2F;)，若頁面出現 It works! 的大字樣就代表安裝成功~~</p>
+<p>若發現回應很久之後出現無法連上的狀況，請確定是否你的機器的防火牆是開啟的狀態，輸入以下指令關閉防火牆</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop</span><br></pre></td></tr></table></figure>
+<p>完成！</p>
+<hr>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>License</span></div><div class="body"><p>The article uses <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</a> license agreement, please indicate the source for reprinting.</p>
+</div></section><section id="share"><div class="header"><span>Share</span></div><div class="body"><div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://blog.balabambe.com/2014/05/20/%E6%89%8B%E5%8B%95%E7%B7%A8%E8%AD%AF%E5%AE%89%E8%A3%9D-apache-2-4-Scientific-Linux-6-5-CentOS-6-5/" /></div><div class="social-wrap dis-select"><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;Copied!&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/8411ed322ced6.svg"/></a></div></div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="header cap theme"><span>READ NEXT</span></section><section class="body fs14"><a id="next" href="/2014/05/07/WinSCP-%E4%BD%BF%E7%94%A8%E4%B8%80%E8%88%AC-user-%E5%B8%B3%E8%99%9F-root%E5%81%9C%E7%94%A8%E6%99%82-%E7%99%BB%E5%85%A5%E4%BD%BF%E7%94%A8-sudo-%E5%82%B3%E6%AA%94/">WinSCP 使用一般 user 帳號(root停用時)登入使用 sudo 傳檔<span class="note">Older</span></a><div class="line"></div><a id="prev" href="/2014/05/21/Linux-KVM-%E8%99%9B%E6%93%AC%E6%A9%9F%E5%99%A8%E5%AE%89%E8%A3%9D-WinXP-Virtio-Disk-Bus-%E9%A9%85%E5%8B%95%E7%A8%8B%E5%BC%8F/">Linux KVM 虛擬機器安裝 WinXP Virtio Disk Bus 驅動程式<span class="note">Newer</span></a><div class="line"></div><a id="more" href="/archives">All Articles</a></section></div>
+
+
+
+
+
+  <div id="disqus_thread"></div>
+  <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+      var disqus_config = function () {
+        this.page.url = 'https://blog.balabambe.com/2014/05/20/%E6%89%8B%E5%8B%95%E7%B7%A8%E8%AD%AF%E5%AE%89%E8%A3%9D-apache-2-4-Scientific-Linux-6-5-CentOS-6-5/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = '1400580615000'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://balabambe.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</p>
+<p>This site was deployed by <a href="https://blog.balabambe.com/">@BalaBambe</a> using <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.3.0">Stellar</a>.</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.3.0';
+  stellar.config = {
+    date_suffix: {
+      just: 'Just',
+      min: 'minutes ago',
+      hour: 'hours ago',
+      day: 'days ago',
+      month: 'months ago',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/js/plugins/sites.js',
+    friendsjs: '/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper/swiper-bundle.min.css","js":"https://unpkg.com/swiper/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+  
+<script id="dsq-count-scr" src="//balabambe.disqus.com/count.js" async></script>
+
+
+</body>
+</html>

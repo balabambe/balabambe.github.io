@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>Joomla 3.x 前台 Content Category List 啟用發佈選項 - 拔辣搬筆的攻城獅人蔘</title>
+
+  
+    <meta name="description" content="Joomla 3 內建前台沒有像後台列表頁一樣有發佈按鈕可以快速切換，可以使用以下方法在前台列表頁啟用發佈按鈕喔! 打開你的前台列表頁，將發佈按鈕的 HTML 貼在你要的表格上12345678910&lt;?php  $menu &#x3D; JFactory::getApplication()-&gt;getMenu();  $active &#x3D; $menu-&gt;getActive();  $itemI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Joomla 3.x 前台 Content Category List 啟用發佈選項">
+<meta property="og:url" content="https://blog.balabambe.com/2014/02/24/Joomla-3-x-%E5%89%8D%E5%8F%B0-Content-Category-List-%E5%95%9F%E7%94%A8%E7%99%BC%E4%BD%88%E9%81%B8%E9%A0%85/index.html">
+<meta property="og:site_name" content="拔辣搬筆的攻城獅人蔘">
+<meta property="og:description" content="Joomla 3 內建前台沒有像後台列表頁一樣有發佈按鈕可以快速切換，可以使用以下方法在前台列表頁啟用發佈按鈕喔! 打開你的前台列表頁，將發佈按鈕的 HTML 貼在你要的表格上12345678910&lt;?php  $menu &#x3D; JFactory::getApplication()-&gt;getMenu();  $active &#x3D; $menu-&gt;getActive();  $itemI">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2014-02-24T04:19:28.000Z">
+<meta property="article:modified_time" content="2023-06-19T02:07:24.872Z">
+<meta property="article:author" content="BalaBambe">
+<meta property="article:tag" content="joomla">
+<meta property="article:tag" content="joomla-development">
+<meta property="article:tag" content="joomla-frontend">
+<meta property="article:tag" content="content-category-list">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+  
+  
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6BESDWMMD1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6BESDWMMD1');
+</script>
+
+</head>
+
+<body>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+
+<header class="header">
+
+<div class="logo-wrap"><a class="title" href="/"><div class="main">拔辣搬筆的攻城獅人蔘</div><div class="sub cap">從後端走到前端 邁向全端之路</div></a></div>
+<nav class="menu dis-select"><a class="nav-item active" href="/">Blog</a><a class="nav-item" href="/about-me">About Me</a><a class="nav-item" href="/portfolio">Portfolio</a></nav></header>
+
+<div class="widgets">
+<div class="widget-wrap" id="toc"><div class="widget-header cap dis-select"><span class="name">TOC</span></div><div class="widget-body fs14 post"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E9%96%8B%E4%BD%A0%E7%9A%84%E5%89%8D%E5%8F%B0%E5%88%97%E8%A1%A8%E9%A0%81%EF%BC%8C%E5%B0%87%E7%99%BC%E4%BD%88%E6%8C%89%E9%88%95%E7%9A%84-HTML-%E8%B2%BC%E5%9C%A8%E4%BD%A0%E8%A6%81%E7%9A%84%E8%A1%A8%E6%A0%BC%E4%B8%8A"><span class="toc-text">打開你的前台列表頁，將發佈按鈕的 HTML 貼在你要的表格上</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E9%96%8B-components-x2F-com-content-x2F-controllers-x2F-article-php-%E5%8A%A0%E5%85%A5%E4%BB%A5%E4%B8%8B%E7%A8%8B%E5%BC%8F%EF%BC%9A"><span class="toc-text">打開 components&#x2F;com_content&#x2F;controllers&#x2F;article.php 加入以下程式：</span></a></li></ol></div></div></div>
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a><span class="sep"></span><a class="cap breadcrumb" href="/">Blog</a></div><div id="post-meta">Posted on&nbsp;<time datetime="2014-02-24T04:19:28.000Z">2014-02-24</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>Joomla 3.x 前台 Content Category List 啟用發佈選項</span></h1>
+<p>Joomla 3 內建前台沒有像後台列表頁一樣有發佈按鈕可以快速切換，可以使用以下方法在前台列表頁啟用發佈按鈕喔!</p>
+<h2 id="打開你的前台列表頁，將發佈按鈕的-HTML-貼在你要的表格上"><a href="#打開你的前台列表頁，將發佈按鈕的-HTML-貼在你要的表格上" class="headerlink" title="打開你的前台列表頁，將發佈按鈕的 HTML 貼在你要的表格上"></a>打開你的前台列表頁，將發佈按鈕的 HTML 貼在你要的表格上</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"><span class="variable">$menu</span> = <span class="title class_">JFactory</span>::<span class="title function_ invoke__">getApplication</span>()-&gt;<span class="title function_ invoke__">getMenu</span>();  </span><br><span class="line"><span class="variable">$active</span> = <span class="variable">$menu</span>-&gt;<span class="title function_ invoke__">getActive</span>();  </span><br><span class="line"><span class="variable">$itemId</span> = <span class="variable">$active</span>-&gt;id;  </span><br><span class="line"><span class="variable">$juri</span> = JURI::<span class="title function_ invoke__">getInstance</span>();  </span><br><span class="line"><span class="variable">$returnURL</span> = <span class="title function_ invoke__">base64_encode</span>(<span class="variable">$juri</span>-&gt;<span class="title function_ invoke__">toString</span>());  </span><br><span class="line"><span class="meta">?&gt;</span>  </span><br><span class="line">&lt;a <span class="class"><span class="keyword">class</span>=&quot;<span class="title">btn</span> <span class="title">btn</span>-<span class="title">micro</span> <span class="title">active</span> <span class="title">hasTooltip</span>&quot; <span class="title">href</span>=&quot;<span class="title">index</span>.<span class="title">php</span>?<span class="title">option</span>=<span class="title">com_content</span>&amp;<span class="title">task</span>=<span class="title">article</span>.<span class="title">state</span>&amp;<span class="title">a_id</span>=&lt;?<span class="title">php</span> <span class="title">echo</span> $<span class="title">article</span>-&gt;<span class="title">id</span>; ?&gt;&amp;<span class="title">return</span>=&lt;?<span class="title">php</span> <span class="title">echo</span> $<span class="title">returnURL</span>; ?&gt;&amp;<span class="title">Itemid</span>=&lt;?<span class="title">php</span> <span class="title">echo</span> $<span class="title">itemId</span>; ?&gt;&quot; <span class="title">title</span>=&quot; &quot; <span class="title">data</span>-<span class="title">original</span>-<span class="title">title</span>=&quot;&quot;&gt;  </span></span><br><span class="line"><span class="class">  &lt;<span class="title">i</span> <span class="title">class</span>=&quot;&lt;?<span class="title">php</span> <span class="title">echo</span> $<span class="title">article</span>-&gt;<span class="title">state</span> ? &#x27;<span class="title">icon</span>-<span class="title">publish</span>&#x27; : &#x27;<span class="title">icon</span>-<span class="title">unpublish</span>&#x27; ; ?&gt;&quot; <span class="title">style</span>=&quot;&lt;?<span class="title">php</span> <span class="title">echo</span> $<span class="title">article</span>-&gt;<span class="title">state</span> ? &#x27;<span class="title">color</span>:#51<span class="title">a351</span>&#x27; : &#x27;<span class="title">color</span>:#<span class="title">bd362f</span>&#x27; ;?&gt;&quot;&gt;&lt;/<span class="title">i</span>&gt;  </span></span><br><span class="line"><span class="class">&lt;/<span class="title">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="打開-components-x2F-com-content-x2F-controllers-x2F-article-php-加入以下程式："><a href="#打開-components-x2F-com-content-x2F-controllers-x2F-article-php-加入以下程式：" class="headerlink" title="打開 components&#x2F;com_content&#x2F;controllers&#x2F;article.php 加入以下程式："></a>打開 components&#x2F;com_content&#x2F;controllers&#x2F;article.php 加入以下程式：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">state</span>(<span class="params"></span>) </span>&#123;  </span><br><span class="line">  <span class="keyword">if</span> (!<span class="title class_">JFactory</span>::<span class="title function_ invoke__">getUser</span>()-&gt;<span class="title function_ invoke__">authorise</span>(<span class="string">&#x27;core.edit&#x27;</span>,<span class="string">&#x27;com_content&#x27;</span>)) &#123;  </span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">JError</span>::<span class="title function_ invoke__">raiseError</span>(<span class="number">500</span>,<span class="string">&#x27;你無權使用。&#x27;</span>);  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="variable">$aid</span> = <span class="title class_">JRequest</span>::<span class="title function_ invoke__">getInt</span>(<span class="string">&#x27;a_id&#x27;</span>);  </span><br><span class="line">  <span class="variable">$returnURL</span> = <span class="title class_">JRequest</span>::<span class="title function_ invoke__">getString</span>(<span class="string">&#x27;return&#x27;</span>);  </span><br><span class="line">  <span class="variable">$model</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">getModel</span>();  </span><br><span class="line">  <span class="variable">$table</span> = <span class="variable">$model</span>-&gt;<span class="title function_ invoke__">getTable</span>();  </span><br><span class="line">  <span class="variable">$table</span>-&gt;<span class="title function_ invoke__">load</span>(<span class="variable">$aid</span>);</span><br><span class="line"></span><br><span class="line">  <span class="variable">$table</span>-&gt;state = (<span class="variable">$table</span>-&gt;state == <span class="number">0</span>) ? <span class="number">1</span> : <span class="number">0</span>;  </span><br><span class="line">  <span class="variable">$table</span>-&gt;<span class="title function_ invoke__">save</span>(<span class="keyword">array</span>());</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">setRedirect</span>(<span class="title function_ invoke__">base64_decode</span>(<span class="variable">$returnURL</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>醬就完成啦~~!!</p>
+<hr>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>License</span></div><div class="body"><p>The article uses <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</a> license agreement, please indicate the source for reprinting.</p>
+</div></section><section id="share"><div class="header"><span>Share</span></div><div class="body"><div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://blog.balabambe.com/2014/02/24/Joomla-3-x-%E5%89%8D%E5%8F%B0-Content-Category-List-%E5%95%9F%E7%94%A8%E7%99%BC%E4%BD%88%E9%81%B8%E9%A0%85/" /></div><div class="social-wrap dis-select"><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;Copied!&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/8411ed322ced6.svg"/></a></div></div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="header cap theme"><span>READ NEXT</span></section><section class="body fs14"><a id="next" href="/2014/02/06/Joomla-3-x-%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%96%87%E5%88%A5%E5%90%8D/">Joomla 3.x 使用中文別名<span class="note">Older</span></a><div class="line"></div><a id="prev" href="/2014/02/26/ubuntu-12-04-sudo-%E4%B8%8D%E7%94%A8%E8%BC%B8%E5%85%A5%E5%AF%86%E7%A2%BC%E7%9A%84%E6%96%B9%E6%B3%95/">ubuntu 12.04 sudo 不用輸入密碼的方法<span class="note">Newer</span></a><div class="line"></div><a id="more" href="/archives">All Articles</a></section></div>
+
+
+
+
+
+  <div id="disqus_thread"></div>
+  <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+      var disqus_config = function () {
+        this.page.url = 'https://blog.balabambe.com/2014/02/24/Joomla-3-x-%E5%89%8D%E5%8F%B0-Content-Category-List-%E5%95%9F%E7%94%A8%E7%99%BC%E4%BD%88%E9%81%B8%E9%A0%85/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = '1393215568000'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://balabambe.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</p>
+<p>This site was deployed by <a href="https://blog.balabambe.com/">@BalaBambe</a> using <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.3.0">Stellar</a>.</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.3.0';
+  stellar.config = {
+    date_suffix: {
+      just: 'Just',
+      min: 'minutes ago',
+      hour: 'hours ago',
+      day: 'days ago',
+      month: 'months ago',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/js/plugins/sites.js',
+    friendsjs: '/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper/swiper-bundle.min.css","js":"https://unpkg.com/swiper/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+  
+<script id="dsq-count-scr" src="//balabambe.disqus.com/count.js" async></script>
+
+
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>CentOS 7 LAMP(MariaDB) 全新安裝記事 - 拔辣搬筆的攻城獅人蔘</title>
+
+  
+    <meta name="description" content="到此 http:&#x2F;&#x2F;www.centos.org&#x2F;download&#x2F;mirrors&#x2F; 尋找 Region 為 Taiwan 的下載 CentOS-7-x86_64-Minimal-1511.iso 安裝開發環境需要的東西： 1yum install wget vim screen git unzip  關閉 selinux 1vim &#x2F;etc&#x2F;selinux&#x2F;config  將 1SELINUX&#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS 7 LAMP(MariaDB) 全新安裝記事">
+<meta property="og:url" content="https://blog.balabambe.com/2015/06/12/CentOS-7-LAMP-MariaDB-%E5%85%A8%E6%96%B0%E5%AE%89%E8%A3%9D%E8%A8%98%E4%BA%8B/index.html">
+<meta property="og:site_name" content="拔辣搬筆的攻城獅人蔘">
+<meta property="og:description" content="到此 http:&#x2F;&#x2F;www.centos.org&#x2F;download&#x2F;mirrors&#x2F; 尋找 Region 為 Taiwan 的下載 CentOS-7-x86_64-Minimal-1511.iso 安裝開發環境需要的東西： 1yum install wget vim screen git unzip  關閉 selinux 1vim &#x2F;etc&#x2F;selinux&#x2F;config  將 1SELINUX&#x3D;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2015-06-11T21:33:09.000Z">
+<meta property="article:modified_time" content="2023-06-19T02:07:24.862Z">
+<meta property="article:author" content="BalaBambe">
+<meta property="article:tag" content="apache">
+<meta property="article:tag" content="lamp">
+<meta property="article:tag" content="php">
+<meta property="article:tag" content="centos">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+  
+  
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6BESDWMMD1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6BESDWMMD1');
+</script>
+
+</head>
+
+<body>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+
+<header class="header">
+
+<div class="logo-wrap"><a class="title" href="/"><div class="main">拔辣搬筆的攻城獅人蔘</div><div class="sub cap">從後端走到前端 邁向全端之路</div></a></div>
+<nav class="menu dis-select"><a class="nav-item active" href="/">Blog</a><a class="nav-item" href="/about-me">About Me</a><a class="nav-item" href="/portfolio">Portfolio</a></nav></header>
+
+<div class="widgets">
+<div class="widget-wrap" id="toc"><div class="widget-header cap dis-select"><span class="name">TOC</span></div><div class="widget-body fs14 post"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%9D-LAMP-Linux-Apache-2-4-6-MariaDB-10-PHP-5-4"><span class="toc-text">安裝 LAMP (Linux+Apache 2.4.6+MariaDB 10+PHP 5.4)</span></a></li></ol></div></div></div>
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a><span class="sep"></span><a class="cap breadcrumb" href="/">Blog</a></div><div id="post-meta">Posted on&nbsp;<time datetime="2015-06-11T21:33:09.000Z">2015-06-12</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>CentOS 7 LAMP(MariaDB) 全新安裝記事</span></h1>
+<p>到此 <a target="_blank" rel="noopener" href="http://www.centos.org/download/mirrors/">http://www.centos.org/download/mirrors/</a> 尋找 Region 為 Taiwan 的下載 <a target="_blank" rel="noopener" href="http://mirror01.idc.hinet.net/CentOS/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso">CentOS-7-x86_64-Minimal-1511.iso</a></p>
+<p>安裝開發環境需要的東西：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install wget vim screen git unzip</span><br></pre></td></tr></table></figure>
+
+<p>關閉 selinux</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/selinux/config</span><br></pre></td></tr></table></figure>
+
+<p>將</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELINUX=enforcing</span><br></pre></td></tr></table></figure>
+
+<p>改為</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELINUX=disabled</span><br></pre></td></tr></table></figure>
+
+<p>然後</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+
+<p>會立馬關閉 SELinux</p>
+<p>關閉防火牆(僅在開發環境適用)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">disable</span> firewalld  </span><br><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
+
+<p>安裝 EPEL yum repository  </p>
+<blockquote>
+<p>epel 更新還蠻快的，有時候要搜尋一下 epel 的最新版本</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install [https://dl.fedoraproject.org/pub/epel/7/x86\_64/e/epel-release-7-8.noarch.rpm](https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm)</span><br></pre></td></tr></table></figure>
+
+<h2 id="安裝-LAMP-Linux-Apache-2-4-6-MariaDB-10-PHP-5-4"><a href="#安裝-LAMP-Linux-Apache-2-4-6-MariaDB-10-PHP-5-4" class="headerlink" title="安裝 LAMP (Linux+Apache 2.4.6+MariaDB 10+PHP 5.4)"></a>安裝 LAMP (Linux+Apache 2.4.6+MariaDB 10+PHP 5.4)</h2><p>如果要安裝 MariaDB 最新版(本文發佈後為 10.0)</p>
+<p>到 <code>/etc/yum.repo.d/</code> 下新增 MariaDB.repo 檔 (參考<a target="_blank" rel="noopener" href="https://downloads.mariadb.org/mariadb/repositories/#mirror=datautama&distro=CentOS&distro_release=centos7-amd64--centos7&version=10.0">網址</a>)</p>
+<p>檔案內容為</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MariaDB 10.0 CentOS repository list - created 2015-06-11 03:17 UTC  </span></span><br><span class="line"><span class="comment"># [http://mariadb.org/mariadb/repositories/](http://mariadb.org/mariadb/repositories/)  </span></span><br><span class="line"><span class="section">[mariadb]</span></span><br><span class="line"><span class="attr">name</span>=MariaDB  </span><br><span class="line"><span class="attr">baseurl</span>=[http://yum.mariadb.org/<span class="number">10.0</span>/centos7-amd64](http://yum.mariadb.org/<span class="number">10.0</span>/centos7-amd64)  </span><br><span class="line"><span class="attr">gpgkey</span>=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB  </span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>儲存後進行安裝</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install httpd mod_ssl php MariaDB-server MariaDB-client php-mbstring php-gd php-xml php-xmlrpc php-mcrypt php-ldap php-pdo php-mysql php-soap</span><br></pre></td></tr></table></figure>
+
+<p>安裝完成後開啟 httpd 與 MariaDB 服務</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> httpd.service</span><br><span class="line">systemctl <span class="built_in">enable</span> mysql</span><br><span class="line">systemctl start httpd</span><br><span class="line">systemctl start mysql</span><br></pre></td></tr></table></figure>
+
+<p>設定並初始化資料庫</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure>
+
+<p>中間至少有五道設定，除了設定資料庫 root 密碼外，其餘幾乎都是 Y</p>
+<p>如果有要安裝 php 5.5、5.6，請<a href="/2014/09/06/CentOS-7-%E5%AE%89%E8%A3%9D-remi-repository-%E4%B8%A6%E9%80%8F%E9%81%8E-remi-%E5%AE%89%E8%A3%9D-php-5-4%E3%80%815-5%E3%80%815-6">參考這篇文章</a></p>
+<p>完成！</p>
+<hr>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>License</span></div><div class="body"><p>The article uses <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</a> license agreement, please indicate the source for reprinting.</p>
+</div></section><section id="share"><div class="header"><span>Share</span></div><div class="body"><div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://blog.balabambe.com/2015/06/12/CentOS-7-LAMP-MariaDB-%E5%85%A8%E6%96%B0%E5%AE%89%E8%A3%9D%E8%A8%98%E4%BA%8B/" /></div><div class="social-wrap dis-select"><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;Copied!&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/8411ed322ced6.svg"/></a></div></div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="header cap theme"><span>READ NEXT</span></section><section class="body fs14"><a id="next" href="/2015/04/24/Mac-OS-X%E3%80%81iPad%E3%80%81iPhone%E3%80%81iPod-%E4%BF%AE%E6%94%B9-Safari%E3%80%81Chrome-%E9%A0%90%E8%A8%AD-Scrollbar/">Mac OS X、iPad、iPhone、iPod 修改 Safari、Chrome 預設 Scrollbar<span class="note">Older</span></a><div class="line"></div><a id="prev" href="/2016/05/26/jQuery-ui-datepicker-%E5%B7%A5%E4%BD%9C%E6%97%A5%E6%97%A5%E6%9C%9F%E9%81%B8%E5%8F%96%E9%99%90%E5%88%B6-restrict-date-range-without-holiday/">jQuery ui datepicker 工作日日期選取限制 (restrict date range without holiday)<span class="note">Newer</span></a><div class="line"></div><a id="more" href="/archives">All Articles</a></section></div>
+
+
+
+
+
+  <div id="disqus_thread"></div>
+  <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+      var disqus_config = function () {
+        this.page.url = 'https://blog.balabambe.com/2015/06/12/CentOS-7-LAMP-MariaDB-%E5%85%A8%E6%96%B0%E5%AE%89%E8%A3%9D%E8%A8%98%E4%BA%8B/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = '1434058389000'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://balabambe.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</p>
+<p>This site was deployed by <a href="https://blog.balabambe.com/">@BalaBambe</a> using <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.3.0">Stellar</a>.</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.3.0';
+  stellar.config = {
+    date_suffix: {
+      just: 'Just',
+      min: 'minutes ago',
+      hour: 'hours ago',
+      day: 'days ago',
+      month: 'months ago',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/js/plugins/sites.js',
+    friendsjs: '/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper/swiper-bundle.min.css","js":"https://unpkg.com/swiper/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+  
+<script id="dsq-count-scr" src="//balabambe.disqus.com/count.js" async></script>
+
+
+</body>
+</html>
