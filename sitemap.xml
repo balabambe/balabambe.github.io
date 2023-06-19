@@ -477,13 +477,6 @@
   </url>
   
   <url>
-    <loc>https://blog.balabambe.com/tags/Disqus/</loc>
-    <lastmod>2023-06-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.balabambe.com/tags/%E5%89%8D%E7%AB%AF/</loc>
     <lastmod>2023-06-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -513,6 +506,13 @@
   
   <url>
     <loc>https://blog.balabambe.com/tags/ie/</loc>
+    <lastmod>2023-06-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.balabambe.com/tags/Disqus/</loc>
     <lastmod>2023-06-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -827,14 +827,14 @@
   </url>
   
   <url>
-    <loc>https://blog.balabambe.com/tags/js/</loc>
+    <loc>https://blog.balabambe.com/tags/php-development/</loc>
     <lastmod>2023-06-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.balabambe.com/tags/php-development/</loc>
+    <loc>https://blog.balabambe.com/tags/js/</loc>
     <lastmod>2023-06-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
