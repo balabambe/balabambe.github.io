@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.balabambe.com/2023/06/19/%E8%A7%A3%E6%B1%BA-Windows-11-Keyboard-Layout-%E9%8D%B5%E7%9B%A4%E4%BD%88%E5%B1%80%E5%88%AA%E4%B8%8D%E6%8E%89-ENG-%E7%9A%84%E5%95%8F%E9%A1%8C/</loc>
+    <loc>https://blog.balabambe.com/about-me/index.html</loc>
     
     <lastmod>2023-06-19</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://blog.balabambe.com/about-me/index.html</loc>
+    <loc>https://blog.balabambe.com/2023/06/19/%E8%A7%A3%E6%B1%BA-Windows-11-Keyboard-Layout-%E9%8D%B5%E7%9B%A4%E4%BD%88%E5%B1%80%E5%88%AA%E4%B8%8D%E6%8E%89-ENG-%E7%9A%84%E5%95%8F%E9%A1%8C/</loc>
     
     <lastmod>2023-06-19</lastmod>
     
@@ -263,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/</loc>
+    <loc>https://blog.balabambe.com/2021/07/29/Hexo-%E6%89%8B%E5%8B%95%E6%96%B0%E5%A2%9E-Google-Analytics%E3%80%81Google-Tag-Manager-%E7%9A%84%E8%BF%BD%E8%B9%A4%E7%A2%BC/</loc>
     
     <lastmod>2023-06-19</lastmod>
     
@@ -272,7 +272,7 @@
   </url>
   
   <url>
-    <loc>https://blog.balabambe.com/2021/07/29/Hexo-%E6%89%8B%E5%8B%95%E6%96%B0%E5%A2%9E-Google-Analytics%E3%80%81Google-Tag-Manager-%E7%9A%84%E8%BF%BD%E8%B9%A4%E7%A2%BC/</loc>
+    <loc>https://blog.balabambe.com/2021/07/31/Hexo-%E6%96%B0%E5%A2%9E-Disqus-%E7%95%99%E8%A8%80%E6%9D%BF%E5%8A%9F%E8%83%BD/</loc>
     
     <lastmod>2023-06-19</lastmod>
     
@@ -463,13 +463,6 @@
   </url>
   
   <url>
-    <loc>https://blog.balabambe.com/tags/Disqus/</loc>
-    <lastmod>2023-06-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.balabambe.com/tags/GA/</loc>
     <lastmod>2023-06-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -478,6 +471,13 @@
   
   <url>
     <loc>https://blog.balabambe.com/tags/GTM/</loc>
+    <lastmod>2023-06-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.balabambe.com/tags/Disqus/</loc>
     <lastmod>2023-06-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
